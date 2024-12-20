@@ -1,18 +1,15 @@
+#ifndef SRVR_DI_CSL
+#define SRVR_DI_CSL
+
 #include <string>
 #include <iostream>
 using namespace std;
 
 class csl 
 { 
-   /* check int value & print msg if invalid */
-   public bool check ( int val, int con, string msg )
-   {
-      string err = "error: ";
-      if ( val < con ) 
-      { 
-        cout  << err + msg << endl; 
-        return false; 
-      }
-      return true; 
-   }
-}
+   public:
+     /* check int value & print msg if invalid */
+     static bool check ( int val, int con, string msg );
+};
+
+#endif

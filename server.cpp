@@ -10,5 +10,5 @@
 int main ( )
 {
     int sfd = socket( AF_INET, SOCK_DGRAM, 0 ); 
-    csl.check( sfd, 0, "failed to create socket" ); 
+    if ( !csl::check( sfd, 0, "failed to create socket" )) { return 0; }
 }
