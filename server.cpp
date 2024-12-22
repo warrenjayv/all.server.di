@@ -7,8 +7,34 @@
 
 #include "console.h"
 
+// macros
+#define MAX   1024
+#define PORT  50116
+
 int main ( )
 {
+    // parameters
+    char buffer[MAX] = {0}; 
+    struct sockaddr_in _srvaddr = { 0 };
+    struct sockaddr_in _cliaddr = { 0 };
+  
+    // create socket
     int sfd = socket( AF_INET, SOCK_DGRAM, 0 ); 
     if ( !csl::check( sfd, 0, "failed to create socket" )) { return 0; }
+
+    // populate server info
+    _srvaddr.sin_family      = AF_INET; 
+    _srvaddr.sin_port        = htons(PORT);
+    _srvaddr.sin_addr.s_addr = INADDR_ANY; 
+
+    // bind 
+    if ( !csl::check 
+    ( 
+       bind( sfd, (const struct sockaddr *) &_srvaddr, sizeof(_srvaddr)),
+       0, 
+       "failed to bind"
+    )) { exit(EXIT_FAILURE); } 
+
+    // close socket 
+    close(sfd); 
 }
