@@ -17,7 +17,11 @@ int main ( )
     char buffer[MAX] = {0}; 
     struct sockaddr_in _srvaddr = { 0 };
     struct sockaddr_in _cliaddr = { 0 };
-  
+
+    // client 
+    socklen_t _len; 
+    int _recsz; 
+    
     // create socket
     int sfd = socket( AF_INET, SOCK_DGRAM, 0 ); 
     if ( !csl::check( sfd, 0, "failed to create socket" )) { return 0; }
@@ -35,6 +39,16 @@ int main ( )
        "failed to bind"
     )) { exit(EXIT_FAILURE); } 
 
+    // daemon
+    while ( true ) 
+    {
+       _len = sizeof(_cliaddr); 
+       _recsz = recvfrom( sfd, (char *)buffer, MAX, MSG_WAITALL, (struct sockaddr *) &_cliaddr, &_len); 
+       buffer[_recsz] = '\0';
+       printf("client: %s\n", buffer); 
+       usleep(15005000);
+    }
+    
     // close socket 
     close(sfd); 
 }
