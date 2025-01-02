@@ -46,7 +46,7 @@ int main ( )
        _recsz = recvfrom( sfd, (char *)buffer, MAX, MSG_WAITALL, (struct sockaddr *) &_cliaddr, &_len); 
        buffer[_recsz] = '\0';
        printf("client: %s\n", buffer); 
-       usleep(15005000);
+       usleep(1000000);
     }
     
     // close socket 
