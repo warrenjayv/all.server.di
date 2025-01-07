@@ -4,8 +4,11 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-
+#include <nlohmann/json.hpp>
 #include "console.h"
+
+// usages
+using json = nlohmann::json; 
 
 // macros
 #define MAX   1024
@@ -13,6 +16,9 @@
 
 int main ( )
 {
+    // local macro
+    string KEY = "msg";
+    
     // parameters
     char buffer[MAX] = {0}; 
     struct sockaddr_in _srvaddr = { 0 };
@@ -42,10 +48,28 @@ int main ( )
     // daemon
     while ( true ) 
     {
+       // struct len 
        _len = sizeof(_cliaddr); 
+
+       // receive data
        _recsz = recvfrom( sfd, (char *)buffer, MAX, MSG_WAITALL, (struct sockaddr *) &_cliaddr, &_len); 
        buffer[_recsz] = '\0';
-       printf("client: %s\n", buffer); 
+      
+       if ( _recsz > 0 ) 
+       {
+          // setup string stream
+          json ex = json::parse((char*) buffer); 
+
+          // print buffer
+          printf("client: %s\n", buffer); 
+
+          // check message
+          if ( ex.contains(KEY)) 
+          {
+            string val = ex[KEY];
+            cout << "msg: " << val << endl; 
+          }
+       }
        usleep(1000000);
     }
     
