@@ -16,8 +16,9 @@ using json = nlohmann::json;
 
 int main ( )
 {
-    // local macro
+    // json macros
     string KEY = "msg";
+    string NIK = "nick";
     
     // parameters
     char buffer[MAX] = {0}; 
@@ -67,8 +68,30 @@ int main ( )
           if ( ex.contains(KEY)) 
           {
             string val = ex[KEY];
-            cout << "msg: " << val << endl; 
+            string nik = ex[NIK];
+            cout << nik << ":" << val << endl; 
+
+            // formulate response 
+            string _resp = nik + ":" + val;  
+        
+            // send buffer
+            char _sbuff[_resp.length( )+1];
+            strcpy( _sbuff, _resp.c_str()); 
+
+            // check
+            printf("sending: %s\n", _sbuff); 
+
+            // send reply 
+            int _sensz = sendto( sfd, _sbuff, strlen(_sbuff), 0, (sockaddr*)&_cliaddr, sizeof(_cliaddr));
+            if (_sensz < 0)
+            {
+              cerr << "sendto failed: " << strerror(errno) << endl; 
+              continue;  
+            } 
+            memset(_sbuff, 0, sizeof(_sbuff)); 
+            
           }
+
        }
        usleep(1000000);
     }
