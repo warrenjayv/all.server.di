@@ -82,13 +82,14 @@ int main ( )
             printf("sending: %s\n", _sbuff); 
 
             // send reply 
-            int _sensz = sendto( sfd, _sbuff, strlen(_sbuff), 0, (sockaddr*)&_cliaddr, sizeof(_cliaddr));
+            int _sensz = sendto( sfd, buffer, strlen(buffer), 0, (sockaddr*)&_cliaddr, sizeof(_cliaddr));
             if (_sensz < 0)
             {
               cerr << "sendto failed: " << strerror(errno) << endl; 
               continue;  
             } 
             memset(_sbuff, 0, sizeof(_sbuff)); 
+            memset(buffer, 0, sizeof(buffer)); 
             
           }
 
