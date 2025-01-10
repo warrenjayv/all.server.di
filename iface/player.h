@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <string.h>
+#include <stdint.h>
 #include <vector>
 
 class plyr
@@ -13,6 +14,11 @@ class plyr
     string      nick; 
     string      json; 
     sockaddr_in sock_in;  
+
+    plyr( string _k, string _n, string _j ) 
+    {
+      key = _k; nick = _n; json = _j; 
+    }
 }
 
 class plyr_iface 

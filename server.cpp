@@ -6,6 +6,7 @@
 #include <string.h>
 #include <nlohmann/json.hpp>
 #include "console.h"
+#include "players/player.h"
 
 // usages
 using json = nlohmann::json; 
