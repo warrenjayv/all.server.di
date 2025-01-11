@@ -19,12 +19,13 @@ class plyr
     {
       key = _k; nick = _n; json = _j; 
     }
-}
+};
 
 class plyr_iface 
 {
   public:
     static vector<plyr> list; 
-}
+    static void add ( plyr _plr );
+};
 
 #endif
