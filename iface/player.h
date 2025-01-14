@@ -2,30 +2,39 @@
 #define SRV_DI_PLYR
 
 #include <iostream>
+#include <string>
 #include <sys/socket.h>
-#include <string.h>
+#include <netinet/in.h>
 #include <stdint.h>
 #include <vector>
 
 class plyr
 {
   public:
-    string      key; 
-    string      nick; 
-    string      json; 
+    std::string key; 
+    std::string nick; 
+    std::string json; 
     sockaddr_in sock_in;  
 
-    plyr( string _k, string _n, string _j ) 
+    plyr( std::string _k, std::string _n, std::string _j, sockaddr_in _in ) 
     {
       key = _k; nick = _n; json = _j; 
+      sock_in = _in; 
     }
 };
 
 class plyr_iface 
 {
+  
+  private:
+    static std::vector<plyr> list; 
+
   public:
-    static vector<plyr> list; 
-    static void add ( plyr _plr );
+    static void add ( plyr _plr )
+    {
+       list.push_back(_plr); 
+    }
+
 };
 
 #endif

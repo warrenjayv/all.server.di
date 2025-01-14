@@ -72,6 +72,9 @@ int main ( )
             string nik = ex[NIK];
             cout << nik << ":" << val << endl; 
 
+            // create player object 
+            plyr _plr( val, nik, std::string(buffer), _cliaddr ); 
+
             // formulate response 
             string _resp = nik + ":" + val;  
         
