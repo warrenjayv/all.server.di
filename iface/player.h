@@ -35,6 +35,10 @@ class plyr_iface
        list.push_back(_plr); 
     }
 
+    static plyr pop ( )
+    {
+       list.pop_back( ); 
+    }
 };
 
 #endif
