@@ -8,5 +8,5 @@ process : server.cpp console.h
 		echo -e "\n--------------------------------------\n" &>> .err
 		g++ -g ${objects} -o server &>> .err
 clean : clear.bat
-		rm .err
-		rm server
+		if [ -f  ".err"  ]; then rm .err;   fi
+		if [ -f "server" ]; then rm server; fi 
