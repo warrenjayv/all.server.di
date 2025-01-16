@@ -18,8 +18,9 @@ using json = nlohmann::json;
 int main ( )
 {
     // json macros
-    string KEY = "msg";
-    string NIK = "nick";
+    string KEY_MSG = "scrl";
+    string KEY_REG = "regs"; 
+    string NIK     = "nick";
     
     // parameters
     char buffer[MAX] = {0}; 
@@ -65,15 +66,21 @@ int main ( )
           // print buffer
           printf("client: %s\n", buffer); 
 
-          // check message
-          if ( ex.contains(KEY)) 
+          // check for registration
+          if ( ex.contains(KEY_REG))
           {
-            string val = ex[KEY];
+              plyr_iface::add( plyr( ex[KEY_REG], ex[NIK], std::string(buffer), _cliaddr) ); 
+          }
+
+          // check message
+          if ( ex.contains(KEY_MSG ))
+          {
+            string val = ex[KEY_REG];
             string nik = ex[NIK];
             cout << nik << ":" << val << endl; 
 
             // create player object 
-            plyr _plr( val, nik, std::string(buffer), _cliaddr ); 
+            // plyr _plr( val, nik, std::string(buffer), _cliaddr ); 
 
             // formulate response 
             string _resp = nik + ":" + val;  
