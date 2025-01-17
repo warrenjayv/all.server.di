@@ -26,19 +26,11 @@ class plyr
 class plyr_iface 
 {
   
-  private:
-    static std::vector<plyr> list; 
+  static inline std::vector<plyr> list; 
 
   public:
-    static void add ( plyr _plr )
-    {
-       list.push_back(_plr); 
-    }
-
-    static plyr pop ( )
-    {
-       list.pop_back( ); 
-    }
+    static void add ( plyr _plr );
+    static plyr pop ( );
 };
 
 #endif
