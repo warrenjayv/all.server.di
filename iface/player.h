@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 #include <stdint.h>
 #include <vector>
+#include <algorithm>
 
 class plyr
 {
@@ -30,6 +31,7 @@ class plyr_iface
 
   public:
     static void add ( plyr _plr );
+    static bool contain(std::string _name); 
     static plyr pop ( );
 };
 
