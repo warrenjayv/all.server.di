@@ -33,6 +33,7 @@ class plyr_iface
     static void add ( plyr _plr );
     static bool contain(std::string _name); 
     static plyr pop ( );
+    static void set (std::string _name, std::string _json);
 };
 
 #endif
