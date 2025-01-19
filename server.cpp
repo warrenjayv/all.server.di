@@ -66,10 +66,20 @@ int main ( )
           // print buffer
           printf("client: %s\n", buffer); 
 
-          // check for registration
+          // registration
           if ( ex.contains(KEY_REG))
           {
-              plyr_iface::add( plyr( ex[KEY_REG], ex[NIK], std::string(buffer), _cliaddr) ); 
+              if (! plyr_iface::contain(ex[NIK])) 
+              {
+
+                plyr_iface::add( plyr( ex[KEY_REG], ex[NIK], std::string(buffer), _cliaddr) ); 
+              }
+          }
+
+          // check if registrar exist & override 
+          if ( ex.contains(KEY_MSG))
+          {
+            
           }
 
           // check message
